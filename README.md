@@ -1,3 +1,5 @@
+<!-- # LEMBRAR DE ATUALIZAR ESSE
+
 # NOME DO PROJETO
 
 > **Ponto de partida (apague este bloco ao preencher).** Projeto em TypeScript + Express + TypeORM + PostgreSQL,
@@ -64,4 +66,4 @@ Variáveis opcionais: `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`,
 
 1. O Controller só enxerga DTOs e Services (nenhum import de `model`).
 2. Regra de negócio mora no Service.
-3. O banco só muda por migration nova, nunca editando uma que já rodou.
+3. O banco só muda por migration nova, nunca editando uma que já rodou. -->
