@@ -6,7 +6,7 @@ export class CriarTabelasClinica1700000000004
 
   async up(q: QueryRunner): Promise<void> {
     await q.query(`
-      CREATE TABLE pacientes (
+      CREATE TABLE IF NOT EXISTS pacientes (
         id SERIAL PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
         cpf VARCHAR(14) UNIQUE NOT NULL,
@@ -14,7 +14,7 @@ export class CriarTabelasClinica1700000000004
         email VARCHAR(100)
       );
 
-      CREATE TABLE profissionais (
+      CREATE TABLE IF NOT EXISTS profissionais (
         id SERIAL PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
         especialidade VARCHAR(100) NOT NULL,
@@ -22,7 +22,7 @@ export class CriarTabelasClinica1700000000004
         email VARCHAR(100)
       );
 
-      CREATE TABLE secretarias (
+      CREATE TABLE IF NOT EXISTS secretarias (
         id SERIAL PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
         cpf VARCHAR(14) UNIQUE NOT NULL,
@@ -32,7 +32,7 @@ export class CriarTabelasClinica1700000000004
         senha VARCHAR(255) NOT NULL
       );
 
-      CREATE TABLE consultas (
+      CREATE TABLE IF NOT EXISTS consultas (
         id SERIAL PRIMARY KEY,
         paciente_id INTEGER NOT NULL
           REFERENCES pacientes(id),
@@ -43,20 +43,20 @@ export class CriarTabelasClinica1700000000004
         status VARCHAR(20) NOT NULL DEFAULT 'agendada'
       );
 
-      CREATE INDEX idx_consultas_paciente
+      CREATE INDEX IF NOT EXISTS idx_consultas_paciente
         ON consultas(paciente_id);
 
-      CREATE INDEX idx_consultas_profissional_horario
+      CREATE INDEX IF NOT EXISTS idx_consultas_profissional_horario
         ON consultas(profissional_id, data_hora);
     `);
   }
 
   async down(q: QueryRunner): Promise<void> {
     await q.query(`
-      DROP TABLE consultas;
-      DROP TABLE secretarias;
-      DROP TABLE profissionais;
-      DROP TABLE pacientes;
+      DROP TABLE IF EXISTS consultas;
+      DROP TABLE IF EXISTS secretarias;
+      DROP TABLE IF EXISTS profissionais;
+      DROP TABLE IF EXISTS pacientes;
     `);
   }
 }
