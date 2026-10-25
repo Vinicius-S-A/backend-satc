@@ -20,11 +20,16 @@ import { MovimentacaoRepository } from "./repository/MovimentacaoRepository";
 import { CategoriaService } from "./service/CategoriaService";
 import { ItemService } from "./service/ItemService";
 import { MovimentacaoService } from "./service/MovimentacaoService";
+import { PacienteController } from "./controller/PacienteController";
+import { PacienteMapper } from "./mapper/PacienteMapper";
+import { PacienteRepository } from "./repository/PacienteRepository";
+import { PacienteService } from "./service/PacienteService";
 
 export function criarApp(ds: DataSource) {
   const categorias = new CategoriaController(new CategoriaService(new CategoriaRepository(ds), new CategoriaMapper()));
   const itens = new ItemController(new ItemService(new ItemRepository(ds), new ItemMapper()));
   const movimentacoes = new MovimentacaoController(new MovimentacaoService(new MovimentacaoRepository(ds), new MovimentacaoMapper()));
+  const pacientes = new PacienteController(new PacienteService(new PacienteRepository(ds),new PacienteMapper()));
 
   const app = express();
   app.use(express.json());
@@ -33,5 +38,6 @@ export function criarApp(ds: DataSource) {
   app.use("/itens", itens.router);
   app.use("/movimentacoes", movimentacoes.router);
   app.use(apiExceptionHandler);
+  app.use("/pacientes", pacientes.router);
   return app;
 }
