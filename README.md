@@ -1,8 +1,6 @@
-<!-- # LEMBRAR DE ATUALIZAR ESSE
-
 # NOME DO PROJETO
 
-> **Ponto de partida (apague este bloco ao preencher).** Projeto em TypeScript + Express + TypeORM + PostgreSQL,
+> Projeto em TypeScript + Express + TypeORM + PostgreSQL,
 > com a arquitetura da disciplina. Categoria, Item e Movimentacao são entidades provisórias: troque pelas do seu tema.
 
 **Tema sorteado:** ...  **Integrantes:** ...
@@ -36,7 +34,7 @@ Veja [docs/contrato-da-api.md](docs/contrato-da-api.md). Swagger UI: `http://loc
 Requisitos: Node 20+ e Docker.
 
 ```bash
-docker compose up -d      # PostgreSQL na porta 5439
+docker compose up -d      # postgresSQL na porta 5439 (pode ser configurado com .env também)
 npm install
 npm run dev               # aplica as migrations e sobe a API na porta 8080
 ```
@@ -63,7 +61,6 @@ Variáveis opcionais: `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`,
 | Injeção pelo construtor | Ligação em `src/app.ts` |
 
 ## Regra das camadas
-
 1. O Controller só enxerga DTOs e Services (nenhum import de `model`).
 2. Regra de negócio mora no Service.
-3. O banco só muda por migration nova, nunca editando uma que já rodou. -->
+3. O banco só muda por migration nova, nunca editando uma que já rodou.
