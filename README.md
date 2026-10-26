@@ -118,7 +118,7 @@ As quatro entidades têm as mesmas três rotas.
 
 | Verbo | Caminho | O que faz | Regra | Sucesso | Erros |
 |---|---|---|---|---|---|
-| `POST` | `/pacientes` | Cadastra um paciente | R4 | `201` | `400` |
+| `POST` | `/pacientes` | Cadastra um paciente | `201` | `400` |
 | `GET` | `/pacientes` | Lista os pacientes | Nenhuma | `200` | |
 | `GET` | `/pacientes/{id}` | Busca um paciente | Nenhuma | `200` | `400`, `404` |
 | `POST` | `/profissionais` | Cadastra um profissional | Nenhuma | `201` | `400` |

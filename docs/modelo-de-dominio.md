@@ -14,7 +14,7 @@ Pessoa atendida pela clínica.
 |---|---|---|---|---|
 | `id` | `number` | `id` | sim | Gerado pelo banco (`SERIAL`) |
 | `nome` | `string` | `nome` | sim | Até 100 caracteres |
-| `cpf` | `string` | `cpf` | sim | Até 14 caracteres. **Único** (R4) |
+| `cpf` | `string` | `cpf` | sim | Até 14 caracteres. **Único** |
 | `telefone` | `string \| null` | `telefone` | não | Até 20 caracteres |
 | `email` | `string \| null` | `email` | não | Até 100 caracteres |
 
