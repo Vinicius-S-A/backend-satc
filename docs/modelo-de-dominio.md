@@ -116,10 +116,13 @@ Como ler: `||--o{` é "um para muitos". Um paciente tem zero ou várias consulta
 
 ## Migrations
 
-Ficam em `src/db/migrations`. O projeto tem **uma migration** que cria as quatro tabelas, na ordem certa: as tabelas referenciadas (`pacientes`, `profissionais`) nascem antes de `consultas`, que referencia as duas. O banco só muda por migration nova: nunca se edita uma que já rodou.
+Ficam em `src/db/migrations`. O projeto tem **quatro migrations**, uma por tabela, na ordem certa: as tabelas referenciadas (`pacientes`, `profissionais`) nascem antes de `consultas`, que referencia as duas. A ordem de execução vem do timestamp no nome da classe (`1700000000001` a `1700000000004`). O banco só muda por migration nova: nunca se edita uma que já rodou.
 
 | Versão | Arquivo | O que cria |
 |---|---|---|
-| V1 | `V1_criar_tabelas_clinica.ts` | Tabelas `pacientes`, `profissionais`, `secretarias` e `consultas`; `CHECK` de expediente (`hora_inicio < hora_fim`) e de duração (`duracao_minutos > 0`); as duas chaves estrangeiras de `consultas`; índices `idx_consultas_paciente_horario` e `idx_consultas_profissional_horario`, que aceleram a checagem de conflito de R1 e R3 |
+| V1 | `V1_criar_pacientes.ts` | Tabela `pacientes`; `cpf` único |
+| V2 | `V2_criar_profissionais.ts` | Tabela `profissionais`; `CHECK` de expediente (`hora_inicio < hora_fim`) |
+| V3 | `V3_criar_secretarias.ts` | Tabela `secretarias`; `cpf` e `login` únicos |
+| V4 | `V4_consultas.ts` | Tabela `consultas`; as duas chaves estrangeiras (`paciente_id`, `profissional_id`); `CHECK` de duração (`duracao_minutos > 0`); índices `idx_consultas_paciente_horario` e `idx_consultas_profissional_horario`, que aceleram a checagem de conflito de R1 e R3 |
 
-As migrations rodam sozinhas quando a API sobe (`migrationsRun: true`). Logo em seguida, `config/schemaValidator.ts` confere se cada entidade tem a tabela e as colunas esperadas.
+As migrations rodam sozinhas quando a API sobe (`migrationsRun: true`). Os arquivos **precisam ter a extensão `.ts`** (ou `.js` após o build), porque o `config/database.ts` carrega apenas `migrations/*.{ts,js}`; um arquivo sem extensão é ignorado e a tabela não é criada. Logo em seguida, `config/schemaValidator.ts` confere se cada entidade tem a tabela e as colunas esperadas.
