@@ -45,6 +45,8 @@ Em clínicas pequenas, a agenda costuma ficar em papel ou planilha. Isso permite
 | R1 | Um profissional não pode ter duas consultas agendadas que se sobreponham no tempo (início e duração entram na conta; consultas coladas, uma terminando quando a outra começa, são permitidas) | `ConsultaService.criar` e `ConsultaRepository.existsConflitoDoProfissional` | `POST /consultas` |
 | R2 | A consulta só pode ser marcada em dia de atendimento do profissional, e início + duração precisam caber no expediente dele | `ConsultaService.validarDisponibilidade` | `POST /consultas` |
 | R3 | Um paciente não pode ter duas consultas agendadas que se sobreponham no tempo | `ConsultaService.criar` e `ConsultaRepository.existsConflitoDoPaciente` | `POST /consultas` |
+| R4 | Não podem existir dois pacientes, nem duas secretárias, com o mesmo CPF. | `service/PacienteService.ts` e `service/SecretariaService.ts`, método criar` | `POST /pacientes` |
+| R5 | 	Não podem existir duas secretárias com o mesmo login. | `service/PacienteService.ts` e `service/SecretariaService.ts`, método criar` | `POST /secretarias` |
 
 Em `POST /consultas`, a ordem das verificações é: paciente e profissional existem (`404`), R2, R1 e R3 (`400`). Só consultas com status `agendada` entram na checagem de conflito.
 
@@ -118,13 +120,13 @@ As quatro entidades têm as mesmas três rotas.
 
 | Verbo | Caminho | O que faz | Regra | Sucesso | Erros |
 |---|---|---|---|---|---|
-| `POST` | `/pacientes` | Cadastra um paciente | `201` | `400` |
+| `POST` | `/pacientes` | Cadastra um paciente | R4 | `201` | `400` |
 | `GET` | `/pacientes` | Lista os pacientes | Nenhuma | `200` | |
 | `GET` | `/pacientes/{id}` | Busca um paciente | Nenhuma | `200` | `400`, `404` |
 | `POST` | `/profissionais` | Cadastra um profissional | Nenhuma | `201` | `400` |
 | `GET` | `/profissionais` | Lista os profissionais | Nenhuma | `200` | |
 | `GET` | `/profissionais/{id}` | Busca um profissional | Nenhuma | `200` | `400`, `404` |
-| `POST` | `/secretarias` | Cadastra uma secretária | R5 | `201` | `400` |
+| `POST` | `/secretarias` | Cadastra uma secretária | R4 e R5 | `201` | `400` |
 | `GET` | `/secretarias` | Lista as secretárias | Nenhuma | `200` | |
 | `GET` | `/secretarias/{id}` | Busca uma secretária | Nenhuma | `200` | `400`, `404` |
 | `POST` | `/consultas` | Agenda uma consulta | R1, R2 e R3 | `201` | `400`, `404` |

@@ -14,7 +14,7 @@ Pessoa atendida pela clínica.
 |---|---|---|---|---|
 | `id` | `number` | `id` | sim | Gerado pelo banco (`SERIAL`) |
 | `nome` | `string` | `nome` | sim | Até 100 caracteres |
-| `cpf` | `string` | `cpf` | sim | Até 14 caracteres. **Único** |
+| `cpf` | `string` | `cpf` | sim | Até 14 caracteres. **Único** (R4) |
 | `telefone` | `string \| null` | `telefone` | não | Até 20 caracteres |
 | `email` | `string \| null` | `email` | não | Até 100 caracteres |
 
@@ -41,7 +41,7 @@ Quem opera o sistema.
 |---|---|---|---|---|
 | `id` | `number` | `id` | sim | Gerado pelo banco |
 | `nome` | `string` | `nome` | sim | Até 100 caracteres |
-| `cpf` | `string` | `cpf` | sim | Até 14 caracteres. **Único** (R5) |
+| `cpf` | `string` | `cpf` | sim | Até 14 caracteres. **Único** (R4) |
 | `telefone` | `string \| null` | `telefone` | não | Até 20 caracteres |
 | `email` | `string \| null` | `email` | não | Até 100 caracteres, formato de e-mail válido |
 | `login` | `string` | `login` | sim | De 3 a 50 caracteres. **Único** (R5) |

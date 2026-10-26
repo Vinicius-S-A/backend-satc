@@ -18,10 +18,10 @@ export class SecretariaService {
 
   async criar(dto: SecretariaRequestDTO): Promise<SecretariaResponseDTO> {
     if (await this.repository.existsByCpf(dto.cpf)) {
-      throw new RegraDeNegocioException("Já existe uma secretária cadastrada com este CPF");
+      throw new RegraDeNegocioException("R4: Já existe uma secretária cadastrada com este CPF");
     }
     if (await this.repository.existsByLogin(dto.login)) {
-      throw new RegraDeNegocioException("Já existe uma secretária cadastrada com este login");
+      throw new RegraDeNegocioException("R5: Já existe uma secretária cadastrada com este login");
     }
     const salva = await this.repository.save(this.mapper.toEntity(dto));
     return this.mapper.toResponse(salva);

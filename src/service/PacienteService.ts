@@ -23,7 +23,7 @@ export class PacienteService {
 
     if (await this.repository.existsByCpf(cpf)) {
       throw new RegraDeNegocioException(
-        "Já existe um paciente cadastrado com este CPF"
+        "R4: Já existe um paciente cadastrado com este CPF"
       );
     }
 
