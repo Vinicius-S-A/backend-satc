@@ -8,36 +8,44 @@ import express from "express";
 import { DataSource } from "typeorm";
 import { configurarOpenApi } from "./config/openapi";
 import { apiExceptionHandler } from "./controller/ApiExceptionHandler";
-import { CategoriaController } from "./controller/CategoriaController";
-import { ItemController } from "./controller/ItemController";
-import { MovimentacaoController } from "./controller/MovimentacaoController";
-import { CategoriaMapper } from "./mapper/CategoriaMapper";
-import { ItemMapper } from "./mapper/ItemMapper";
-import { MovimentacaoMapper } from "./mapper/MovimentacaoMapper";
-import { CategoriaRepository } from "./repository/CategoriaRepository";
-import { ItemRepository } from "./repository/ItemRepository";
-import { MovimentacaoRepository } from "./repository/MovimentacaoRepository";
-import { CategoriaService } from "./service/CategoriaService";
-import { ItemService } from "./service/ItemService";
-import { MovimentacaoService } from "./service/MovimentacaoService";
+
+// paciente
 import { PacienteController } from "./controller/PacienteController";
 import { PacienteMapper } from "./mapper/PacienteMapper";
 import { PacienteRepository } from "./repository/PacienteRepository";
 import { PacienteService } from "./service/PacienteService";
 
+// profissional
+import { ProfissionalController } from "./controller/ProfissionalController";
+import { ProfissionalMapper } from "./mapper/ProfissionalMapper";
+import { ProfissionalRepository } from "./repository/ProfissionalRepository";
+import { ProfissionalService } from "./service/ProfissionalService";
+
+// secretaria
+import { SecretariaController } from "./controller/SecretariaController";
+import { SecretariaMapper } from "./mapper/SecretariaMapper";
+import { SecretariaRepository } from "./repository/SecretariaRepository";
+import { SecretariaService } from "./service/SecretariaService";
+
+// consulta
+import { ConsultaController } from "./controller/ConsultaController";
+import { ConsultaMapper } from "./mapper/ConsultaMapper";
+import { ConsultaRepository } from "./repository/ConsultaRepository";
+import { ConsultaService } from "./service/ConsultaService";
+
 export function criarApp(ds: DataSource) {
-  const categorias = new CategoriaController(new CategoriaService(new CategoriaRepository(ds), new CategoriaMapper()));
-  const itens = new ItemController(new ItemService(new ItemRepository(ds), new ItemMapper()));
-  const movimentacoes = new MovimentacaoController(new MovimentacaoService(new MovimentacaoRepository(ds), new MovimentacaoMapper()));
   const pacientes = new PacienteController(new PacienteService(new PacienteRepository(ds),new PacienteMapper()));
+  const profissionais = new ProfissionalController(new ProfissionalService(new ProfissionalRepository(ds),new ProfissionalMapper()));
+  const secretarias = new SecretariaController(new SecretariaService(new SecretariaRepository(ds),new SecretariaMapper()));
+  const consultas = new ConsultaController(new ConsultaService(new ConsultaRepository(ds),new ConsultaMapper(),new PacienteRepository(ds),new ProfissionalRepository(ds)));
 
   const app = express();
   app.use(express.json());
   configurarOpenApi(app);
-  app.use("/categorias", categorias.router);
-  app.use("/itens", itens.router);
-  app.use("/movimentacoes", movimentacoes.router);
-  app.use(apiExceptionHandler);
   app.use("/pacientes", pacientes.router);
+  app.use("/profissionais", profissionais.router);
+  app.use("/secretarias", secretarias.router);
+  app.use("/consultas", consultas.router);
+  app.use(apiExceptionHandler);
   return app;
 }
