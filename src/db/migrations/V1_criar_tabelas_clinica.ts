@@ -1,7 +1,7 @@
 
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class CriarTabelasClinica1700000000004
+export class CriarTabelasClinica1700000000001
   implements MigrationInterface {
 
   async up(q: QueryRunner): Promise<void> {
