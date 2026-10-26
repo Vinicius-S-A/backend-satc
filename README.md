@@ -45,8 +45,6 @@ Em clínicas pequenas, a agenda costuma ficar em papel ou planilha. Isso permite
 | R1 | Um profissional não pode ter duas consultas agendadas que se sobreponham no tempo (início e duração entram na conta; consultas coladas, uma terminando quando a outra começa, são permitidas) | `ConsultaService.criar` e `ConsultaRepository.existsConflitoDoProfissional` | `POST /consultas` |
 | R2 | A consulta só pode ser marcada em dia de atendimento do profissional, e início + duração precisam caber no expediente dele | `ConsultaService.validarDisponibilidade` | `POST /consultas` |
 | R3 | Um paciente não pode ter duas consultas agendadas que se sobreponham no tempo | `ConsultaService.criar` e `ConsultaRepository.existsConflitoDoPaciente` | `POST /consultas` |
-| R4 | Não podem existir dois pacientes com o mesmo CPF | `PacienteService.criar` | `POST /pacientes` |
-| R5 | Não podem existir duas secretárias com o mesmo CPF nem o mesmo login | `SecretariaService.criar` | `POST /secretarias` |
 
 Em `POST /consultas`, a ordem das verificações é: paciente e profissional existem (`404`), R2, R1 e R3 (`400`). Só consultas com status `agendada` entram na checagem de conflito.
 

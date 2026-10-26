@@ -1,6 +1,6 @@
 // CAMADA: Mapper
 // RESPONSABILIDADE: converter SecretariaRequestDTO em Secretaria e Secretaria em SecretariaResponseDTO
-//                   (a resposta nunca leva a senha). A senha recebida chega aqui já em hash.
+//                   (a resposta nunca leva a senha).
 // REGRAS: nenhuma.
 // ROTAS ATENDIDAS: as de /secretarias.
 // SITUAÇÃO: implementado.

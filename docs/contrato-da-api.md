@@ -57,8 +57,8 @@ O projeto não tem rotas fora do padrão cadastrar, listar e buscar. As regras d
 | Verbo | Caminho | O que faz | Regra | Sucesso | Erros |
 |---|---|---|---|---|---|
 | `POST` | `/consultas` | Agenda a consulta só se o horário estiver livre para o profissional e para o paciente e dentro do expediente | R1, R2 e R3 | `201` | `400`, `404` |
-| `POST` | `/pacientes` | Cadastra o paciente só se o CPF ainda não existir | R4 | `201` | `400` |
-| `POST` | `/secretarias` | Cadastra a secretária só se o CPF e o login ainda não existirem | R5 | `201` | `400` |
+| `POST` | `/pacientes` | Cadastra o paciente só se o CPF ainda não existir | `201` | `400` |
+| `POST` | `/secretarias` | Cadastra a secretária só se o CPF e o login ainda não existirem | `201` | `400` |
 
 As regras estão descritas no [README](../README.md#o-problema). Em `POST /consultas`, as verificações rodam nesta ordem: paciente e profissional existem (`404`), depois R2, R1 e R3 (`400`).
 

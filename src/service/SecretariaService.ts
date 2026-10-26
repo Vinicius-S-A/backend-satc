@@ -1,5 +1,5 @@
 // CAMADA: Service
-// RESPONSABILIDADE: casos de uso das secretárias; coordena Mapper e Repository e faz o hash da senha.
+// RESPONSABILIDADE: casos de uso das secretárias;
 // REGRAS: CPF único e login único (400 se já existir).
 // ROTAS ATENDIDAS: as de /secretarias em docs/contrato-da-api.md.
 // SITUAÇÃO: implementada.
